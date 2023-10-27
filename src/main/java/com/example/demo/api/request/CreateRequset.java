@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 @Getter
 @AllArgsConstructor
 public class CreateRequset {
-    private String user;
+    private String id;
     private String pw;
     private String name;
     private String nick;

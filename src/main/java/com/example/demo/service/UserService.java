@@ -19,7 +19,7 @@ public class UserService {
         CreateRequset createRequset
     ){
         UserEntity userEntity = UserEntity.builder()
-                .users(createRequset.getUser())
+                .id(createRequset.getId())
                 .pw(createRequset.getPw())
                 .name(createRequset.getName())
                 .nick(createRequset.getNick())
@@ -32,4 +32,11 @@ public class UserService {
         return userEntity;
     }
 
+    @Transactional
+    public void deleteUser(
+            String id,String pw
+    ){
+        UserEntity userEntity = userRepository.findByIdAndPw(id, pw);
+        userRepository.delete(userEntity);
+    }
 }
