@@ -52,4 +52,14 @@ public class UserService {
                 .build();
                 
     }
+
+    public UserEntity findPwByIdAndName(String id, String name){
+
+        UserEntity userEntity = userRepository.findPwByIdAndName(id,name);
+        return UserEntity.builder()
+                .id(userEntity.getId())
+                .pw(userEntity.getPw())
+                .name(userEntity.getName())
+                .build();
+    }
 }

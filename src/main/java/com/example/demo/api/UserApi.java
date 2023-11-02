@@ -34,6 +34,12 @@ public class UserApi {
 
     }
 
-
+    @GetMapping("/user/findPw/{id}/{name}")
+    public UserEntity findUserPw(
+            @PathVariable String id,
+            @PathVariable  String name
+    ){
+        return userService.findPwByIdAndName(id, name);
+    }
 
 }
