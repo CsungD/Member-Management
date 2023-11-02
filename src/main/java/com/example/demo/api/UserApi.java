@@ -1,6 +1,8 @@
 package com.example.demo.api;
 
 import com.example.demo.api.request.CreateRequset;
+import com.example.demo.api.response.User;
+import com.example.demo.model.UserEntity;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,14 @@ public class UserApi {
             @PathVariable  String pw
     ){
         userService.deleteUser(id,pw);
+    }
+
+    @GetMapping("/user/findId/{name}")
+    public UserEntity findUserId(
+            @PathVariable String name
+    ){
+       return userService.findByUserId(name);
+
     }
 
 

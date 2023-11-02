@@ -26,4 +26,5 @@ public class UserEntity {
     private String nick;
     private ZonedDateTime createAt;
     private ZonedDateTime updateAt;
+
 }

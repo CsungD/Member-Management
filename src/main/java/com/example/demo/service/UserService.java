@@ -1,10 +1,12 @@
 package com.example.demo.service;
 
 import com.example.demo.api.request.CreateRequset;
+import com.example.demo.api.response.User;
 import com.example.demo.model.UserEntity;
 import com.example.demo.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
@@ -12,6 +14,7 @@ import java.time.ZonedDateTime;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository userRepository;
 
     @Transactional
@@ -38,5 +41,15 @@ public class UserService {
     ){
         UserEntity userEntity = userRepository.findByIdAndPw(id, pw);
         userRepository.delete(userEntity);
+    }
+
+    public UserEntity findByUserId(String name)   {
+
+        UserEntity userEntity = userRepository.findByName(name);
+        return UserEntity.builder()
+                .id(userEntity.getId())
+                .name(userEntity.getName())
+                .build();
+                
     }
 }
