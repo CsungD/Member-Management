@@ -27,4 +27,9 @@ public class UserEntity {
     private ZonedDateTime createAt;
     private ZonedDateTime updateAt;
 
+    public void changeNickAndPw(String nick,String pw){
+        this.pw = pw;
+        this.nick = nick;
+        this.updateAt = ZonedDateTime.now();
+    }
 }

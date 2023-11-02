@@ -62,4 +62,13 @@ public class UserService {
                 .name(userEntity.getName())
                 .build();
     }
+
+    public void changeNickAndPw(
+            Long no,
+            CreateRequset createRequset
+    ){
+        UserEntity userEntity = userRepository.findById(no).orElseThrow(()->new RuntimeException("나타나지않습니다."));
+        userEntity.changeNickAndPw(createRequset.getNick(), createRequset.getPw());
+        userRepository.save(userEntity);
+    }
 }

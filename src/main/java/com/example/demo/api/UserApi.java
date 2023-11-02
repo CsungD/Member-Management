@@ -42,4 +42,11 @@ public class UserApi {
         return userService.findPwByIdAndName(id, name);
     }
 
+    @PutMapping("/user/change/{no}")
+    public void changeNickAndPw(
+            @PathVariable Long no,
+            @RequestBody CreateRequset createRequset
+    ){
+        userService.changeNickAndPw(no, createRequset);
+    }
 }
