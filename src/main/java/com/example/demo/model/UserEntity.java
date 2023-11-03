@@ -12,7 +12,7 @@ import java.time.ZonedDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "USERS")
+@Table(name = "Members")
 @Entity
 public class UserEntity {
 
@@ -20,16 +20,17 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
 
+    @Column(nullable = false, unique = true)
     private String id;
+    @Column(nullable = false)
     private String pw;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false, unique = true)
     private String nick;
-    private ZonedDateTime createAt;
-    private ZonedDateTime updateAt;
 
     public void changeNickAndPw(String nick,String pw){
         this.pw = pw;
         this.nick = nick;
-        this.updateAt = ZonedDateTime.now();
     }
 }

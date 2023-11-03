@@ -9,12 +9,11 @@ import java.time.ZonedDateTime;
 @Getter
 @Builder
 @AllArgsConstructor
-public class User {
-    private  Long no;
+public class MemberResponse {
+    private Long no;
     private final String id;
     private final String pw;
     private final String name;
     private final String nick;
-    private final ZonedDateTime createAt;
-    private final ZonedDateTime updateAt;
+
 }

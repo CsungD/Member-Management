@@ -1,15 +1,14 @@
 package com.example.demo.service;
 
-import com.example.demo.api.request.CreateRequset;
-import com.example.demo.api.response.User;
+
+import com.example.demo.api.request.MemberRequset;
 import com.example.demo.model.UserEntity;
 import com.example.demo.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.ZonedDateTime;
+
 
 @Service
 @RequiredArgsConstructor
@@ -19,15 +18,13 @@ public class UserService {
 
     @Transactional
     public UserEntity createUser(
-        CreateRequset createRequset
+        MemberRequset member
     ){
         UserEntity userEntity = UserEntity.builder()
-                .id(createRequset.getId())
-                .pw(createRequset.getPw())
-                .name(createRequset.getName())
-                .nick(createRequset.getNick())
-                .createAt(ZonedDateTime.now())
-                .updateAt(ZonedDateTime.now())
+                .id(member.getId())
+                .pw(member.getPw())
+                .name(member.getName())
+                .nick(member.getNick())
                 .build();
 
         userRepository.save(userEntity);
@@ -45,7 +42,7 @@ public class UserService {
 
     public UserEntity findByUserId(String name)   {
 
-        UserEntity userEntity = userRepository.findByName(name);
+        UserEntity userEntity = userRepository.findIdByName(name);
         return UserEntity.builder()
                 .id(userEntity.getId())
                 .name(userEntity.getName())
@@ -65,10 +62,10 @@ public class UserService {
 
     public void changeNickAndPw(
             Long no,
-            CreateRequset createRequset
+            MemberRequset member
     ){
         UserEntity userEntity = userRepository.findById(no).orElseThrow(()->new RuntimeException("나타나지않습니다."));
-        userEntity.changeNickAndPw(createRequset.getNick(), createRequset.getPw());
+        userEntity.changeNickAndPw(member.getNick(), member.getPw());
         userRepository.save(userEntity);
     }
 }

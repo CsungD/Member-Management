@@ -1,10 +1,11 @@
 package com.example.demo.api;
 
-import com.example.demo.api.request.CreateRequset;
-import com.example.demo.api.response.User;
+
+import com.example.demo.api.request.MemberRequset;
 import com.example.demo.model.UserEntity;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,8 +15,10 @@ public class UserApi {
     private final UserService userService;
     @PostMapping("/user/create")
     public void createUser(
-        @RequestBody CreateRequset createRequset){
-        userService.createUser(createRequset);
+        @RequestBody @Validated MemberRequset member){
+        if(member.getId() != null){
+            userService.createUser(member);
+        }
     }
 
     @DeleteMapping("/user/delect/{id}/{pw}")
@@ -45,8 +48,8 @@ public class UserApi {
     @PutMapping("/user/change/{no}")
     public void changeNickAndPw(
             @PathVariable Long no,
-            @RequestBody CreateRequset createRequset
+            @RequestBody MemberRequset member
     ){
-        userService.changeNickAndPw(no, createRequset);
+        userService.changeNickAndPw(no, member);
     }
 }
